@@ -1,0 +1,19 @@
+ History File for VH-1 simulation run on 06 / 03 / 2014
+
+Oblique Sod shock tube in 1 dimensions.
+Grid dimensions:  100
+
+Ratio of specific heats = 1.667
+Pressure ratio is 0.100
+Density ratio is 0.125
+
+Wrote  NCState1000.dat to disk at time = 0.00000E+00 (ncycle =      0)
+Wrote  NCState1001.dat to disk at time = 5.00000E-02 (ncycle =     14)
+Wrote  NCState1002.dat to disk at time = 1.00000E-01 (ncycle =     30)
+Wrote  NCState1003.dat to disk at time = 1.50000E-01 (ncycle =     46)
+Wrote  NCState1004.dat to disk at time = 2.00000E-01 (ncycle =     62)
+Wrote  NCState1005.dat to disk at time = 2.50000E-01 (ncycle =     78)
+Wrote  NCState1006.dat to disk at time = 3.00000E-01 (ncycle =     94)
+ successful stop at cycle number         100
+ elapsed time =   1.2005250E-02  minutes
+speed = ***** kz/s
