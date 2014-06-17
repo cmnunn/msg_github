@@ -76,7 +76,7 @@ endif
 pright = smallp 
 dright = smallr
 pleft  = 0.138                    !kb*10**15
-dleft  = 5e-16                    !10**-9/tcor
+dleft  = 5.0e-16                    !10**-9/tcor
 gam    = 1.01
 
 gamm = gam - 1
