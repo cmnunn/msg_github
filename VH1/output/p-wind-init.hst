@@ -1,0 +1,11 @@
+ History File for VH-1 simulation run on 06 / 16 / 2014
+
+Oblique Pressure Wave in 1 dimensions.
+Grid dimensions:  128
+
+Ratio of specific heats = 1.667
+Pressure ratio is 0.000
+Density ratio is 0.000
+
+Wrote p-wind-init1000. to disk at time = 0.00000E+00 (ncycle =      0)
+Wrote p-wind-init1001. to disk at time = 1.15189E-01 (ncycle =      2)

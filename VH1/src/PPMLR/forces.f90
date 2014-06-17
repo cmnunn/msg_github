@@ -35,7 +35,7 @@ if(sweep=='x') then
   else if(ngeom==2) then  ! SPHERICAL R
 
     do n = nmin-4, nmax+5
-      grav(n) = 0.0
+      grav(n) = (-G*msol)/(xf(n)**2)
       if (xf(n)/=0.0) then
         fict(n) = (w(n)*w(n)+v(n)*v(n))/xf(n)
       else
@@ -74,7 +74,7 @@ else if(sweep=='y') then
     enddo
 
   else if(ngeom==4) then  ! SPHERICAL THETA
-
+ 
     do n = nmin-4, nmax+5
       fict(n) = -u(n)*w(n) / radius
       sinxf0 = sin(xf(n))

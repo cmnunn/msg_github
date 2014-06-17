@@ -1,7 +1,7 @@
 subroutine init
 
-! Sod shock tube problem (a whimpy test) in 1, 2, or 3 dimensions
-! 24jan92 blondin
+! Pressure Problem in 1D
+! 17jun14 cerba cmnunn
 !=======================================================================
 ! GLOBALS
 use global
@@ -14,6 +14,7 @@ INTEGER :: i, j, k
 REAL :: ridt, xvel, yvel, zvel, width, widthz, widthy
 REAL :: xmin, xmax, ymin, ymax, zmin, zmax
 REAL :: dleft, pleft, dright, pright, plane
+REAL :: a2, ve2b2a2                   !new, user defined variables
 
 !--------------------------------------------------------------------------------
 ! Set up geometry and boundary conditions of grid
@@ -35,23 +36,29 @@ REAL :: dleft, pleft, dright, pright, plane
 ! Define the computational grid...
 
 ndim = 1
-ngeomx = 0
-ngeomy = 0
-ngeomz = 0
+ngeomx = 2
+ngeomy = 4
+ngeomz = 5
 
-nleftx = 0
-nrightx= 0
-nlefty = 0
-nrighty= 0
-nleftz = 0
-nrightz= 0
+nleftx = 2
+nrightx = 2
+nlefty = 3
+nrighty = 3
+nleftz = 3
+nrightz = 3
 
-xmin   = 0.0
-xmax   = 1.0
+pinflo = pleft
+dinflo = dleft
+uinflo = 0.0
+vinflo = 0.0
+winflo = 0.0
+
+xmin   = 1.0*rsol
+xmax   = 100.0*rsol
 ymin   = 0.0
 ymax   = 1.0
 zmin   = 0.0
-zmax   = 1.0
+zmax   = 2.0
 
 ! If any dimension is angular, multiply coordinates by pi...
 if(ngeomy >= 3) then
@@ -64,15 +71,15 @@ if(ngeomz >= 3) then
 endif
 
 !======================================================================
-! Set up parameters from the problem (Sod shock tube)
+! Set up parameters from the problem (Pressure Wave)
 
-pright = 0.1 
-dright = 0.125 
-pleft  = 1.0 
-dleft  = 1.0 
-gam    = 5. / 3.
+pright = smallp 
+dright = smallr
+pleft  = 0.138                    !kb*10**15
+dleft  = 5e-16                    !10**-9/tcor
+gam    = 1.01
 
-gamm = gam - 1.0
+gamm = gam - 1
 
 !=======================================================================
 ! set time and cycle counters
@@ -98,7 +105,7 @@ if (ndim == 1) zyc(1) = 0.0
 !======================================================================
 ! Log parameters of problem in history file
 
-write (8,"('Oblique Sod shock tube in ',i1,' dimensions.')") ndim
+write (8,"('Oblique Pressure Wave in ',i1,' dimensions.')") ndim
 if (ndim==1) then
  write (8,"('Grid dimensions: ',i4)") imax
 else if (ndim==2) then
@@ -114,17 +121,20 @@ write (8,*)
 
 ! initialize grid:
 
+a2 = (kb*tcor)/mu
+ve2b2a2 = (G*msol)/(2*rsol*a2)
+
 do k = 1, kmax
  do j = 1, jmax
   do i = 1, imax
-    plane = zxc(i)+zyc(j)+zzc(k)
-    if(plane >= 0.5) then
-      zro(i,j,k) = dright
-      zpr(i,j,k) = pright
-    else
-      zro(i,j,k) = dleft
-      zpr(i,j,k) = pleft
-    endif
+    !plane = zxc(i)+zyc(j)+zzc(k)
+    !if(plane >= 0.5) then
+     zpr(i,j,k) = pleft*exp(ve2b2a2*(rsol/zxa(i)-1))
+     zro(i,j,k) = zpr(i,j,k)/a2
+    !else
+    !  zro(i,j,k) = dleft
+    !  zpr(i,j,k) = pleft
+    !endif
     zux(i,j,k) = 0.
     zuy(i,j,k) = 0.
     zuz(i,j,k) = 0.

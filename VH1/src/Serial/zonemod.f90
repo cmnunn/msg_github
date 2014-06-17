@@ -3,7 +3,7 @@ module zone
 ! (formerly zone.h) global (3D) data arrays
 !======================================================================= 
  
- INTEGER, PARAMETER :: imax=100, jmax=100, kmax=1   ! Memory dimensions
+ INTEGER, PARAMETER :: imax=128, jmax=1, kmax=1   ! Memory dimensions
 
  REAL, DIMENSION(imax,jmax,kmax) :: zro, zpr, zux, zuy, zuz, zfl
  

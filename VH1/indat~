@@ -1,6 +1,6 @@
 &hinput
  rstrt   = 'no'
- prefix  = 'NCState'
+ prefix  = 'p-wind-init'
  ncycend = 100
  ndump   = 5000000
  nprin   = 20

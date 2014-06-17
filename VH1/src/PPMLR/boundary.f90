@@ -18,6 +18,7 @@ INTEGER :: n
 !    = 1 : outflow (zero gradients)
 !    = 2 : fixed inflow (eg, uinflo,pinflo,...)
 !    = 3 : periodic (eg, u(nmin-1) = u(nmax))
+!    = 5 : user-defined boundary conditions
 
 if ( nleft == 0 ) then
   do n = 1, 6
@@ -133,6 +134,29 @@ else if ( nright == 3 ) then
     e (nmax+n) = e (nmin+n-1)
     f (nmax+n) = f (nmin+n-1)
   enddo
+else if ( nright == 5 ) then
+  do n = 1, 6
+    dx (nmax+n)= dx (nmin+n-1)
+    dx0(nmax+n)= dx0(nmin+n-1)
+    xa (nmax+n)= xa (nmax+n-1) + dx (nmax+n-1)
+    xa0(nmax+n)= xa0(nmax+n-1) + dx0(nmax+n-1)
+    r (nmax+n) = dotflo
+    u (nmax+n) = u(nmax+n-1)+(u(nmax+n-1)-u(nmax+n-2))
+    v (nmax+n) = v (nmin+n-1)
+    w (nmax+n) = w (nmin+n-1)
+    p (nmax+n) = potflo
+    e (nmax+n) = e (nmin+n-1)
+    f (nmax+n) = f (nmin+n-1)
+  enddo
+
+
+
+
+
+
+
+
+
 endif
 
 return

@@ -5,8 +5,8 @@ module global
 
  character(len=50) :: prefix              ! prefix for output filenames
 
- integer :: ncycle, ncycp, ncycm, ncycd  ! cycle number
- integer :: nfile                        ! output file numbers
+ integer :: ncycle, ncycp, ncycm, ncycd   ! cycle number
+ integer :: nfile                         ! output file numbers
  integer :: ndim
 
  real :: time, dt, timem, timep, svel 
@@ -15,9 +15,17 @@ module global
  real, parameter :: courant = 0.5           ! timestep fraction of courant limit
  real, parameter :: pi = 3.1415926535897931 ! shouldn't computers know this?
  real, parameter :: xwig = 0.00             ! fraction of a zone to wiggle grid for dissipation
- real, parameter :: smallp = 1.0e-15        ! Set small values to prevent divide by zero
- real, parameter :: smallr = 1.0e-15
+ real, parameter :: smallp = 1.0e-30        ! Set small values to prevent divide by zero
+ real, parameter :: smallr = 1.0e-30
  real, parameter :: small  = 1.0e-15
+
+ real, parameter :: G = 6.674e-8            ! Define Other Variables (defined in cgs)
+ real, parameter :: msol = 1.989e+33
+ real, parameter :: kb = 1.380658e-16
+ real, parameter :: tsurf = 5800.0
+ real, parameter :: tcor = 2.0e+6
+ real, parameter :: rsol = 6.955e+10
+ real, parameter :: mu = 9.95e-25
 
  real :: uinflo, dinflo, vinflo, winflo, pinflo, einflo 
  real :: uotflo, dotflo, votflo, wotflo, potflo, eotflo
